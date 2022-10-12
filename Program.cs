@@ -15,17 +15,12 @@ namespace HealthSystemProject
         static int Shieldcap = 100;
         static void Main(string[] args)
         {
-            ShowHUD();
-            TakeDamage(130);
-            ShowHUD();
-            Heal(40);
-            ShowHUD();
-            ShieldHeal(40);
-            ShowHUD();
+            ShowHUD();      //Hud stuff goes here 
         }
         static void ShowHUD()
         {
-            if (Health<=0){Lives-=1;Health=100;Shield=100;}YouDied();
+            if (Health<=0){Lives-=1;Health=100;Shield=100;}
+            YouDied();
             Console.WriteLine("INTERESTING GAME TITLE");
             Console.WriteLine(" | " + "Health:" + Health + " | " + "Shield:" + Shield + " | " + "Lives:" + Lives + " | ");
             Console.ReadKey(true);
