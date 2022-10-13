@@ -15,7 +15,6 @@ namespace HealthSystemProject
         static int Shieldcap = 100;
         static void Main(string[] args)
         {
-            ShowHUD();      //Hud stuff goes here 
         }
         static void ShowHUD()
         {
