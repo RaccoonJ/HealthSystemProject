@@ -17,6 +17,10 @@ namespace HealthSystemProject
         static void Main(string[] args)
         {
             ShowHUD();
+            TakeDamageDev();
+            ShowHUD();
+            HealDev();
+            ShowHUD();
             ShieldHealDev();
             ShowHUD();
         }
