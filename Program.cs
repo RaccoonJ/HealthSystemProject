@@ -14,14 +14,25 @@ namespace HealthSystemProject
         static int Lives = 3;
         static int Healthcap = 100;
         static int Shieldcap = 100;
+
         static void Main(string[] args)
         {
             ShowHUD();
-            TakeDamageDev();
+            Console.WriteLine("Testing spill damage");
+            TakeDamage(210);
+            ErrorChecks();
             ShowHUD();
-            HealDev();
+            Console.WriteLine("Testing negative damage");
+            TakeDamage(-50);
+            ErrorChecks();
             ShowHUD();
-            ShieldHealDev();
+            Console.WriteLine("Testing normal heal");
+            Heal(10);
+            ErrorChecks();
+            ShowHUD();
+            Console.WriteLine("Testing over heal");
+            Heal(110);
+            ErrorChecks();
             ShowHUD();
         }
 
@@ -39,14 +50,34 @@ namespace HealthSystemProject
         }
         static void ShowHUD()
         {
-            if (Health<=0){Lives-=1;Health=100;Shield=100;}
-            YouDied();
+
+            Console.WriteLine("-----------------------------------------------------------------------------------------");
             Console.WriteLine("INTERESTING GAME TITLE");
             Console.WriteLine(" | " + "Health:" + Health + " | " + "Shield:" + Shield + " | " + "Lives:" + Lives + " | ");
+            Console.WriteLine("-----------------------------------------------------------------------------------------");
             Console.ReadKey(true);
         }
 
-        static void TakeDamageRND(int Damage)
+        static void TakeDamage(int Damage)
+        {
+            Console.WriteLine("Player is about to take " + Damage + " damage");
+            Console.ReadKey(true);
+            
+            if (Damage < 0)
+            {
+                Console.WriteLine("You can't input negative numbers.");
+                Health += Damage;
+            }
+
+            Shield -= Damage;
+            if (Shield < 0)
+                Health = Health + Shield;
+            if (Shield < 0)
+                Shield = 0;
+
+
+        }
+        static void TakeDamageRND()
         {
             int Damage;
             Damage = RNDDamage.Next(10,51);
@@ -59,19 +90,9 @@ namespace HealthSystemProject
             if (Shield < 0)
                 Shield = 0;
 
-            if (Shield > Shieldcap)
+            if (Damage < 0)
             {
                 Console.WriteLine("You can't input negative numbers.");
-                Shield = 100;
-            }
-
-
-            if (Health > Healthcap)
-            {
-                Console.WriteLine("You can't input negative numbers.");
-                Health = 100;
-
-                Console.ReadKey(true);
             }
 
         }
@@ -100,16 +121,10 @@ namespace HealthSystemProject
             if (Shield < 0)
                 Shield = 0;
 
-            if (Shield > Shieldcap)
+            if (Damage < 0)
             {
                 Console.WriteLine("You can't input negative numbers.");
-                Shield = 100;
-
-                if (Health > Healthcap)
-                    Console.WriteLine("You can't input negative numbers.");
-                Health = 100;
-
-                Console.ReadKey(true);
+                Health += Damage;
             }
 
         }
@@ -155,7 +170,7 @@ namespace HealthSystemProject
         }
         static void Heal(int HealAmount)
         {
-            Console.WriteLine("You healed!");
+            Console.WriteLine("You are about to heal " + HealAmount + " health");
             Health += HealAmount;
             if (Health > Healthcap)
                 Health = Healthcap;
@@ -192,5 +207,5 @@ namespace HealthSystemProject
                 Shield = Shieldcap;
 
         }
-    }
-}
+            }
+        }
