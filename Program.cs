@@ -46,7 +46,7 @@ namespace HealthSystemProject
             Console.ReadKey(true);
         }
 
-        static void TakeDamage()
+        static void TakeDamageRND(int Damage)
         {
             int Damage;
             Damage = RNDDamage.Next(10,51);
